@@ -1,27 +1,33 @@
 #include "main.h"
+
 /**
- * cap_string - capitalizes each word
- * @s: word
- * Return: char
+ * cap_string - stringin ilk herfini boyuk herf edir
+ * @s: ssss
+ *
+ * Return: return edirrrr
  */
 char *cap_string(char *s)
 {
 	int i = 0;
-	char t;
+	int j;
 
-	while (*(s + i))
+	char separators[] = " \t\n,;.!?\"(){}";
+
+	if (s[0] >= 'a' && s[0] <= 'z')
+		s[0] -= 32;
+
+	while (s[i] != '\0')
 	{
-		t = *(s + i - 1);
-		if (*(s + i) >= 97 && *(s + i) <= 122)
+		for (j = 0; separators[j] != '\0'; j++)
 		{
-			if (t == ' ' || t == '\t' || t == '\n' || t == ',' || t == ';' || t == '.')
-				*(s + i) -= 32;
-			if (t == '!' || t == '?' || t == '(' || t == ')' || t == '{' || t == '}')
-				*(s + i) -= 32;
-			if (t == '"' || i == 0)
-				*(s + i) -= 32;
+			if (s[i] == separators[j] && (s[i + 1] >= 'a' && s[i + 1] <= 'z'))
+			{
+				s[i + 1] -= 32;
+				break;
+			}
 		}
 		i++;
 	}
+
 	return (s);
-}~                                   
+}
