@@ -2,10 +2,10 @@
 #include "dog.h"
 
 /**
- * _strlen - Compute the length of a string.
- * @s: The string.
+ * _strlen - Returns the length of a string
+ * @s: The string to measure
  *
- * Return: Length of @s.
+ * Return: Length of the string
  */
 static int _strlen(const char *s)
 {
@@ -17,11 +17,11 @@ static int _strlen(const char *s)
 }
 
 /**
- * _strcpy - Copy a string to a destination buffer.
- * @dest: Destination buffer.
- * @src: Source string.
+ * _strcpy - Copies a string to a buffer
+ * @dest: Destination buffer
+ * @src: Source string
  *
- * Return: Pointer to @dest.
+ * Return: Pointer to dest
  */
 static char *_strcpy(char *dest, const char *src)
 {
@@ -37,18 +37,18 @@ static char *_strcpy(char *dest, const char *src)
 }
 
 /**
- * new_dog - Create a new dog, storing copies of name and owner.
- * @name: Dog's name.
- * @age: Dog's age.
- * @owner: Dog's owner.
+ * new_dog - Creates a new dog and stores copies of its name and owner
+ * @name: Pointer to the dog's name string
+ * @age: Dog's age
+ * @owner: Pointer to the owner's name string
  *
- * Return: Pointer to the new dog_t, or NULL on failure.
+ * Return: Pointer to the new dog_t structure, or NULL if it fails
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
     dog_t *d;
-    char *ncopy, *ocopy;
-    int nlen, olen;
+    char *name_copy, *owner_copy;
+    int name_len, owner_len;
 
     if (!name || !owner)
         return (NULL);
@@ -57,29 +57,29 @@ dog_t *new_dog(char *name, float age, char *owner)
     if (!d)
         return (NULL);
 
-    nlen = _strlen(name);
-    olen = _strlen(owner);
+    name_len = _strlen(name);
+    owner_len = _strlen(owner);
 
-    ncopy = malloc((nlen + 1) * sizeof(char));
-    if (!ncopy)
+    name_copy = malloc((name_len + 1) * sizeof(char));
+    if (!name_copy)
     {
         free(d);
         return (NULL);
     }
-    ocopy = malloc((olen + 1) * sizeof(char));
-    if (!ocopy)
+    owner_copy = malloc((owner_len + 1) * sizeof(char));
+    if (!owner_copy)
     {
-        free(ncopy);
+        free(name_copy);
         free(d);
         return (NULL);
     }
 
-    _strcpy(ncopy, name);
-    _strcpy(ocopy, owner);
+    _strcpy(name_copy, name);
+    _strcpy(owner_copy, owner);
 
-    d->name = ncopy;
+    d->name = name_copy;
     d->age = age;
-    d->owner = ocopy;
+    d->owner = owner_copy;
 
     return (d);
 }
